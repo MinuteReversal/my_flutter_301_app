@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
 
-void main() {
+LocalStorage storage = LocalStorage('storage_name');
+void main() async {
+  await storage.ready;
   runApp(const MyApp());
 }
 
@@ -50,8 +53,18 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    int? num = storage.getItem('counter');
+    if (num != null) {
+      _counter = num;
+    }
+  }
+
   void _incrementCounter() {
     setState(() {
+      storage.setItem('counter', _counter);
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
       // so that the display can reflect the updated values. If we changed
