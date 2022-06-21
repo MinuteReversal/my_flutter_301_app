@@ -45,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     vsync: this,
     length: tabs.length,
   );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
